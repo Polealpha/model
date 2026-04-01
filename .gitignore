@@ -14,6 +14,7 @@ release-*/
 
 # Data and outputs
 datasets/synthetic/*.jsonl
+datasets/trimodal_emotion/*.npz
 datasets/processed/*
 datasets/splits/*.json
 reports/generated/*

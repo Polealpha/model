@@ -2,7 +2,7 @@
 This section reports the results that are actually supported by the current repository release. We evaluate synthetic-only training and synthetic-plus-weaklabel training. Real-pilot and raw-video experiments remain out of scope for this version.
 
 \subsection{Metrics}
-Timing prediction is evaluated with accuracy, balanced accuracy, macro-F1, and per-class precision/recall/F1. Because the timing labels are imbalanced, balanced accuracy and macro-F1 are the primary metrics. Strategy prediction is evaluated with strategy accuracy and strategy macro-F1. For the multitask model, we additionally report state MAE.
+Timing prediction is evaluated with accuracy, balanced accuracy, macro-F1, and per-class precision/recall/F1. Because the timing labels are imbalanced, balanced accuracy and macro-F1 are the primary metrics. Strategy prediction is evaluated with strategy accuracy and strategy macro-F1. For the multitask model, we additionally report state MAE. For the tri-modal emotion encoder, we report fine-emotion accuracy, balanced accuracy, macro-F1, valence MAE, arousal MAE, and auxiliary state MAE.
 
 \subsection{Protocol}
 The formal experiments reported here were trained on two NVIDIA A800 80GB GPUs using the \texttt{remote\_a800.yaml} setting. Synthetic training uses a 24{,}000/2{,}400/2{,}400 split; mixed training augments the synthetic train split with 286 weak-label training episodes extracted from historical logs and evaluates on both the held-out synthetic split and the held-out weaklabel split. The bridge-log parser is implemented but not included in the main experiments because its current volume is too small for stable training conclusions.
@@ -18,6 +18,11 @@ Three findings are robust across the current runs. First, on the held-out synthe
 \input{tables/weaklabel_results}
 
 Held-out weaklabel performance remains the hardest setting. The exploratory joint model is strongest on weaklabel timing Macro-F1 at 36.29\%, the structured baseline reaches 27.29\%, and the multitask model drops to 7.62\%. Strategy transfer is weaker still: the best held-out weaklabel strategy Macro-F1 is only 22.50\% from the structured baseline, while the joint model reaches 18.06\%. These numbers are useful as a bootstrapping signal, not as proof of real-world robustness. They mainly quantify the current synthetic-to-log mismatch and motivate future raw-video ingestion, stronger weaklabel reconstruction, and real-pilot collection.
+
+\subsection{Tri-Modal Emotion Benchmark}
+\input{tables/trimodal_results}
+
+The new tri-modal benchmark tests the perception layer in isolation. Full fusion reaches 97.59\% accuracy and 97.58\% Macro-F1 on the held-out synthetic benchmark, while also keeping valence MAE at 0.068 and arousal MAE at 0.055. The ablations are more informative than the headline number: face-only, motion-only, and audio-only settings collapse to 24.33\%, 8.33\%, and 31.11\% accuracy, respectively. On this controlled benchmark, fusion is not a marginal gain but the core source of performance.
 
 \subsection{Status Audit}
 \input{tables/audit_table}

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Synthetic tri-modal fine-grained emotion benchmark. Full fusion uses face, motion, and audio together; ablations zero out the other two modalities at test time. All accuracy and F1 numbers are percentages.}
+\label{tab:trimodal-results}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Model & Acc. & Macro-F1 & Val. MAE & Aro. MAE & State MAE \\
+\midrule
+Full tri-modal & 97.59 & 97.58 & 0.068 & 0.055 & 0.053 \\
+Face only & 24.33 & 11.08 & 0.209 & 0.452 & 0.181 \\
+Motion only & 8.33 & 1.28 & 0.302 & 0.478 & 0.242 \\
+Audio only & 31.11 & 16.65 & 0.302 & 0.150 & 0.244 \\
+\bottomrule
+\end{tabular}
+\end{table}

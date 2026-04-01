@@ -1,0 +1,589 @@
+{
+  "model": "trimodal_emotion",
+  "metrics": {
+    "train": {
+      "emotion_accuracy": 0.976475,
+      "emotion_balanced_accuracy": 0.9764750000000001,
+      "emotion_macro_f1": 0.9764350090212273,
+      "valence_mae": 0.06918353587388992,
+      "arousal_mae": 0.05544941872358322,
+      "state_mae": 0.053769733756780624,
+      "support_need_mae": 0.05698084831237793,
+      "per_class": {
+        "neutral": {
+          "precision": 0.9985695310105241,
+          "recall": 0.9773,
+          "f1": 0.987820286046394,
+          "support": 10000.0
+        },
+        "calm": {
+          "precision": 0.928462351697404,
+          "recall": 0.7904,
+          "f1": 0.853886458164533,
+          "support": 10000.0
+        },
+        "content": {
+          "precision": 0.8126495726495726,
+          "recall": 0.9508,
+          "f1": 0.8763133640552996,
+          "support": 10000.0
+        },
+        "joy": {
+          "precision": 0.9999000099990001,
+          "recall": 1.0,
+          "f1": 0.999950002499875,
+          "support": 10000.0
+        },
+        "relief": {
+          "precision": 1.0,
+          "recall": 0.9999,
+          "f1": 0.999949997499875,
+          "support": 10000.0
+        },
+        "tired": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 10000.0
+        },
+        "sadness": {
+          "precision": 0.9999,
+          "recall": 0.9999,
+          "f1": 0.9999,
+          "support": 10000.0
+        },
+        "lonely": {
+          "precision": 0.9999,
+          "recall": 0.9999,
+          "f1": 0.9999,
+          "support": 10000.0
+        },
+        "anxiety": {
+          "precision": 0.9998999699909973,
+          "recall": 0.9996,
+          "f1": 0.9997499624943742,
+          "support": 10000.0
+        },
+        "frustration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 10000.0
+        },
+        "anger": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 10000.0
+        },
+        "overwhelmed": {
+          "precision": 0.9996001199640108,
+          "recall": 0.9999,
+          "f1": 0.9997500374943759,
+          "support": 10000.0
+        }
+      }
+    },
+    "dev": {
+      "emotion_accuracy": 0.97675,
+      "emotion_balanced_accuracy": 0.97675,
+      "emotion_macro_f1": 0.9766415737422406,
+      "valence_mae": 0.0690925121307373,
+      "arousal_mae": 0.05618087947368622,
+      "state_mae": 0.05373549461364746,
+      "support_need_mae": 0.057576313614845276,
+      "per_class": {
+        "neutral": {
+          "precision": 0.9979777553083923,
+          "recall": 0.987,
+          "f1": 0.9924585218702866,
+          "support": 1000.0
+        },
+        "calm": {
+          "precision": 0.933253873659118,
+          "recall": 0.783,
+          "f1": 0.8515497553017944,
+          "support": 1000.0
+        },
+        "content": {
+          "precision": 0.8114334470989761,
+          "recall": 0.951,
+          "f1": 0.8756906077348067,
+          "support": 1000.0
+        },
+        "joy": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "relief": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "tired": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "sadness": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "lonely": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "anxiety": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "frustration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "anger": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "overwhelmed": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        }
+      }
+    },
+    "test": {
+      "emotion_accuracy": 0.9759166666666667,
+      "emotion_balanced_accuracy": 0.9759166666666667,
+      "emotion_macro_f1": 0.9758250458071852,
+      "valence_mae": 0.06838323920965195,
+      "arousal_mae": 0.05521415174007416,
+      "state_mae": 0.053490154445171356,
+      "support_need_mae": 0.0567055344581604,
+      "per_class": {
+        "neutral": {
+          "precision": 0.9949290060851927,
+          "recall": 0.981,
+          "f1": 0.9879154078549849,
+          "support": 1000.0
+        },
+        "calm": {
+          "precision": 0.929845422116528,
+          "recall": 0.782,
+          "f1": 0.8495382944052146,
+          "support": 1000.0
+        },
+        "content": {
+          "precision": 0.8090366581415175,
+          "recall": 0.949,
+          "f1": 0.873446847676024,
+          "support": 1000.0
+        },
+        "joy": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "relief": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "tired": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "sadness": {
+          "precision": 1.0,
+          "recall": 0.999,
+          "f1": 0.9994997498749375,
+          "support": 1000.0
+        },
+        "lonely": {
+          "precision": 0.999000999000999,
+          "recall": 1.0,
+          "f1": 0.9995002498750625,
+          "support": 1000.0
+        },
+        "anxiety": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "frustration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "anger": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        },
+        "overwhelmed": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1000.0
+        }
+      }
+    },
+    "ablations": {
+      "face_only": {
+        "emotion_accuracy": 0.24325,
+        "emotion_balanced_accuracy": 0.24325,
+        "emotion_macro_f1": 0.11080988455672441,
+        "valence_mae": 0.20896822214126587,
+        "arousal_mae": 0.45153793692588806,
+        "state_mae": 0.1808469295501709,
+        "support_need_mae": 0.07945069670677185,
+        "per_class": {
+          "neutral": {
+            "precision": 0.515695067264574,
+            "recall": 0.92,
+            "f1": 0.6609195402298851,
+            "support": 1000.0
+          },
+          "calm": {
+            "precision": 0.23701067615658364,
+            "recall": 0.999,
+            "f1": 0.3831255992329818,
+            "support": 1000.0
+          },
+          "content": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "joy": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "relief": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "tired": {
+            "precision": 0.16663889351774705,
+            "recall": 1.0,
+            "f1": 0.28567347521782605,
+            "support": 1000.0
+          },
+          "sadness": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "lonely": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anxiety": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "frustration": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anger": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "overwhelmed": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          }
+        }
+      },
+      "motion_only": {
+        "emotion_accuracy": 0.08333333333333333,
+        "emotion_balanced_accuracy": 0.08333333333333333,
+        "emotion_macro_f1": 0.012820512820512822,
+        "valence_mae": 0.3017963767051697,
+        "arousal_mae": 0.477891206741333,
+        "state_mae": 0.2421664297580719,
+        "support_need_mae": 0.3450668156147003,
+        "per_class": {
+          "neutral": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "calm": {
+            "precision": 0.08333333333333333,
+            "recall": 1.0,
+            "f1": 0.15384615384615385,
+            "support": 1000.0
+          },
+          "content": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "joy": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "relief": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "tired": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "sadness": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "lonely": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anxiety": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "frustration": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anger": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "overwhelmed": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          }
+        }
+      },
+      "audio_only": {
+        "emotion_accuracy": 0.3110833333333333,
+        "emotion_balanced_accuracy": 0.3110833333333333,
+        "emotion_macro_f1": 0.16653965066901422,
+        "valence_mae": 0.302350789308548,
+        "arousal_mae": 0.1499207615852356,
+        "state_mae": 0.24440595507621765,
+        "support_need_mae": 0.3672846555709839,
+        "per_class": {
+          "neutral": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "calm": {
+            "precision": 0.22658959537572254,
+            "recall": 0.784,
+            "f1": 0.3515695067264574,
+            "support": 1000.0
+          },
+          "content": {
+            "precision": 0.6154345006485085,
+            "recall": 0.949,
+            "f1": 0.7466561762391818,
+            "support": 1000.0
+          },
+          "joy": {
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4,
+            "support": 1000.0
+          },
+          "relief": {
+            "precision": 0.333555703802535,
+            "recall": 1.0,
+            "f1": 0.5002501250625313,
+            "support": 1000.0
+          },
+          "tired": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "sadness": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "lonely": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anxiety": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "frustration": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "anger": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          },
+          "overwhelmed": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1000.0
+          }
+        }
+      }
+    }
+  },
+  "config": {
+    "batch_size": 512,
+    "hidden_dim": 384,
+    "epochs": 22,
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "dropout": 0.1,
+    "num_layers": 4,
+    "num_heads": 8,
+    "label_smoothing": 0.05,
+    "va_loss_weight": 0.6,
+    "state_loss_weight": 0.4,
+    "support_loss_weight": 0.2,
+    "grad_clip": 1.0,
+    "device": "cuda",
+    "multi_gpu": true,
+    "seed": 42
+  },
+  "dataset_manifest": {
+    "config": {
+      "seed": 42,
+      "train_size": 120000,
+      "dev_size": 12000,
+      "test_size": 12000,
+      "sequence_steps": 48,
+      "face_dim": 10,
+      "motion_dim": 10,
+      "audio_dim": 10,
+      "persona_dim": 6
+    },
+    "counts": {
+      "train": 120000,
+      "dev": 12000,
+      "test": 12000
+    },
+    "fine_emotion_labels": [
+      "neutral",
+      "calm",
+      "content",
+      "joy",
+      "relief",
+      "tired",
+      "sadness",
+      "lonely",
+      "anxiety",
+      "frustration",
+      "anger",
+      "overwhelmed"
+    ],
+    "state_targets": [
+      "stress",
+      "fatigue",
+      "attention_drop",
+      "suppression"
+    ]
+  },
+  "training_summary": {
+    "loss_history": [
+      0.5902177803198496,
+      0.3602713830471039,
+      0.3521787140369415,
+      0.3523699091275533,
+      0.3486436071872711,
+      0.3491003770192464,
+      0.35534047094980875,
+      0.3496862586657206,
+      0.49665038612683615,
+      0.354943630139033,
+      0.3494331929206848,
+      0.347785077492396,
+      0.34553170285224916,
+      0.3444970960299174,
+      0.34574997391700746,
+      0.3450389630317688,
+      0.3470184584935506,
+      0.34815462913513184,
+      0.34572318166097005,
+      0.34442118968963625,
+      0.3445521947542826,
+      0.34309067821502687
+    ],
+    "device": "cuda",
+    "device_count": 2
+  }
+}

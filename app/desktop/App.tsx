@@ -1,5 +1,6 @@
 ﻿import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
+  ActiveCareFeedbackLabel,
   AssistantMode,
   CareDeliveryStrategy,
   CarePlan,
@@ -46,6 +47,10 @@ import {
   Plus,
 } from "lucide-react";
 import {
+  PersonalityProfile,
+  getPersonalityState,
+} from "./services/activationService";
+import {
   LoginResult,
   getActivationState,
   validateSession,
@@ -68,6 +73,11 @@ import {
 } from "./services/deviceService";
 import { connectEventStream, EngineEvent } from "./services/eventService";
 import { getUserProfile, updateUserProfile } from "./services/profileService";
+import {
+  buildResearchEpisodeWindow,
+  buildResearchFeedbackPayload,
+  submitResearchFeedback,
+} from "./services/researchService";
 import { sendEngineSignal } from "./services/engineService";
 import { generateDailySummary } from "./services/llmService";
 import { AssistantRuntimeStatus, getAssistantRuntimeStatus, getDueAssistantTodos } from "./services/assistantService";
@@ -561,6 +571,7 @@ const App: React.FC = () => {
   );
   const [scores, setScores] = useState<RiskScores>({ V: 0, A: 0, T: 0, S: 0 });
   const [riskDetail, setRiskDetail] = useState<RiskDetail | null>(null);
+  const [personalityProfile, setPersonalityProfile] = useState<PersonalityProfile | null>(null);
   const [events, setEvents] = useState<EmotionEvent[]>([]);
   const [sysLogs, setSysLogs] = useState<SystemEvent[]>([]);
   const [faceTrack, setFaceTrack] = useState<FaceTrackState | null>(null);
@@ -578,6 +589,7 @@ const App: React.FC = () => {
     "idle" | "detecting" | "listening" | "thinking" | "speaking"
   >("idle");
   const wakeActiveUntilRef = useRef<number>(0);
+  const latestResearchEpisodeRef = useRef<ReturnType<typeof buildResearchEpisodeWindow> | null>(null);
   const assistantStatusLoggedRef = useRef(false);
   const seenReminderIdsRef = useRef<Set<string>>(new Set());
 
@@ -1004,6 +1016,44 @@ const App: React.FC = () => {
     [appendMessage]
   );
 
+  const updateMessageFeedback = useCallback(
+    (messageId: string, feedbackState: ActiveCareFeedbackLabel, feedbackLatencyMs: number) => {
+      setMessages((prev) =>
+        prev.map((item) =>
+          item.id === messageId
+            ? {
+                ...item,
+                feedbackState,
+                feedbackLatencyMs,
+              }
+            : item
+        )
+      );
+    },
+    []
+  );
+
+  const handleActiveCareFeedback = useCallback(
+    async (message: ChatMessage, feedback: ActiveCareFeedbackLabel) => {
+      const responseLatencyMs = Math.max(0, Date.now() - message.timestamp.getTime());
+      updateMessageFeedback(message.id, feedback, responseLatencyMs);
+      try {
+        await submitResearchFeedback(
+          buildResearchFeedbackPayload({
+            messageId: message.id,
+            sampleId: message.researchSampleId || latestResearchEpisodeRef.current?.sample_id || null,
+            feedback,
+            responseLatencyMs,
+            source: message.activeCareKind === "research" ? "desktop_research_care" : "desktop_product_care",
+          })
+        );
+      } catch (error) {
+        console.warn("research feedback submit failed:", error);
+      }
+    },
+    [updateMessageFeedback]
+  );
+
   const expressionLabelForChat = (() => {
     const exprId = Number(riskDetail?.V_sub?.expression_class_id);
     const labels = ["neutral", "happiness", "surprise", "sadness", "anger", "disgust", "fear", "contempt"];
@@ -1026,17 +1076,17 @@ const App: React.FC = () => {
     const t = Number(reason.T ?? payload.T ?? 0);
     const s = Number(reason.S ?? payload.S ?? Math.max(v, a, t, 0));
     const description =
-      String(payload?.care_plan?.text || payload?.summary || payload?.transcript || "").trim() ||
+      String(payload?.care_plan?.text || payload?.care_utterance?.draft_text || payload?.summary || payload?.transcript || "").trim() ||
       `event:${event.type}`;
     const carePlanPayload = payload?.care_plan;
     const carePlan =
-      carePlanPayload && typeof carePlanPayload === "object" && carePlanPayload.text
+      ((carePlanPayload && typeof carePlanPayload === "object" && carePlanPayload.text) || payload?.care_utterance?.draft_text)
         ? {
-            text: String(carePlanPayload.text),
-            style: (carePlanPayload.style as CarePlan["style"]) || "warm",
-            motion: carePlanPayload.motion,
-            emo: carePlanPayload.emo,
-            followup_question: carePlanPayload.followup_question,
+            text: String(carePlanPayload?.text || payload?.care_utterance?.draft_text),
+            style: (carePlanPayload?.style as CarePlan["style"]) || "warm",
+            motion: carePlanPayload?.motion,
+            emo: carePlanPayload?.emo,
+            followup_question: String(carePlanPayload?.followup_question || payload?.care_utterance?.confirmation_question || ""),
           }
         : undefined;
 
@@ -1407,11 +1457,11 @@ const App: React.FC = () => {
         return;
       }
 
-      if (["TriggerFired", "CarePlanReady", "DailySummaryReady"].includes(event.type)) {
+      if (["TriggerFired", "CarePlanReady", "ResearchDecisionReady", "DailySummaryReady"].includes(event.type)) {
         pushSystemLog(event.type, payload, event.timestamp_ms);
       }
 
-      if (["TriggerFired", "CarePlanReady", "DailySummaryReady"].includes(event.type)) {
+      if (["TriggerFired", "CarePlanReady", "ResearchDecisionReady", "DailySummaryReady"].includes(event.type)) {
         const emotionEvent = toEmotionEvent(event);
         if (emotionEvent) {
           setEvents((prev) => [emotionEvent, ...prev].slice(0, 60));
@@ -1422,21 +1472,28 @@ const App: React.FC = () => {
         pushToast("触发检测", payload?.reason?.pattern || "检测到触发条件");
       }
 
-      if (event.type === "CarePlanReady" && payload?.care_plan?.text) {
+      const researchText = String(payload?.care_utterance?.draft_text || "").trim();
+      const productText = String(payload?.care_plan?.text || "").trim();
+      const hasResearchCare = Boolean(researchText);
+      if ((event.type === "CarePlanReady" && (productText || hasResearchCare)) || (event.type === "ResearchDecisionReady" && hasResearchCare)) {
         const contentSource = String(payload?.care_plan?.policy?.content_source || "")
           .trim()
           .toLowerCase();
         const reasonPattern = String(payload?.reason?.pattern || "").trim().toLowerCase();
         const allowManualFallback = contentSource === "manual_fallback" && reasonPattern === "manual";
-        if (contentSource !== "llm" && !allowManualFallback) {
+        const allowResearchSource =
+          contentSource === "research" ||
+          hasResearchCare ||
+          Boolean(payload?.timing_decision?.decision || payload?.strategy_plan?.strategy_level);
+        if (contentSource !== "llm" && !allowManualFallback && !allowResearchSource) {
           return;
         }
         const plan: CarePlan = {
-          text: String(payload.care_plan.text),
-          style: (payload.care_plan.style as CarePlan["style"]) || "warm",
-          motion: payload.care_plan.motion,
-          emo: payload.care_plan.emo,
-          followup_question: payload.care_plan.followup_question,
+          text: productText || researchText,
+          style: (payload?.care_plan?.style as CarePlan["style"]) || "warm",
+          motion: payload?.care_plan?.motion,
+          emo: payload?.care_plan?.emo,
+          followup_question: String(payload?.care_plan?.followup_question || payload?.care_utterance?.confirmation_question || ""),
         };
         const deliveryMode = String(payload?.delivery_mode || "text").toLowerCase();
         if (deliveryMode === "text" || deliveryMode === "both") {
@@ -1452,6 +1509,10 @@ const App: React.FC = () => {
             text: plan.text,
             timestamp: new Date(event.timestamp_ms),
             isActiveCare: true,
+            activeCareKind: allowResearchSource ? "research" : "product",
+            researchSampleId: String(payload?.sample_id || latestResearchEpisodeRef.current?.sample_id || ""),
+            feedbackState: null,
+            feedbackLatencyMs: null,
           },
           true
         );
@@ -2054,6 +2115,40 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!isAuthenticated || isGuest) return;
     let active = true;
+    const refreshPersonality = async () => {
+      try {
+        const profile = await getPersonalityState();
+        if (!active || !profile?.ok) return;
+        setPersonalityProfile(profile);
+      } catch (error) {
+        if (!active) return;
+        console.warn("personality state fetch failed:", error);
+      }
+    };
+    void refreshPersonality();
+    const timer = window.setInterval(() => {
+      void refreshPersonality();
+    }, 60000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, [isAuthenticated, isGuest]);
+
+  useEffect(() => {
+    if (!isAuthenticated || isGuest) return;
+    latestResearchEpisodeRef.current = buildResearchEpisodeWindow({
+      scores,
+      riskDetail,
+      deviceStatus,
+      mode,
+      personality: personalityProfile,
+    });
+  }, [deviceStatus, isAuthenticated, isGuest, mode, personalityProfile, riskDetail, scores]);
+
+  useEffect(() => {
+    if (!isAuthenticated || isGuest) return;
+    let active = true;
     const refreshChatHistory = async () => {
       try {
         const history = await getChatHistory();
@@ -2415,6 +2510,7 @@ const App: React.FC = () => {
                 currentEmotion={scores.S > 0.5 ? EmotionType.ANXIOUS : EmotionType.CALM}
                 initialMessages={messages}
                 onSendMessage={handleChatUpdate}
+                onActiveCareFeedback={handleActiveCareFeedback}
                 isGuest={isGuest}
                 variant="compact"
                 voiceState={voiceState}
@@ -2830,6 +2926,7 @@ const App: React.FC = () => {
                 currentEmotion={scores.S > 0.5 ? EmotionType.ANXIOUS : EmotionType.CALM}
                 initialMessages={messages}
                 onSendMessage={handleChatUpdate}
+                onActiveCareFeedback={handleActiveCareFeedback}
                 isGuest={isGuest}
                 voiceState={voiceState}
                 expressionLabel={expressionLabelForChat}

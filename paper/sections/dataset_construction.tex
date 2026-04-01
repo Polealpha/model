@@ -4,6 +4,9 @@ The current release combines a reproducible synthetic benchmark with a log-deriv
 \subsection{Synthetic}
 The synthetic benchmark is generated from 60-second windows with a 5-second stride abstraction. Each episode includes persona, context, observation proxies, latent state labels, timing labels, strategy labels, template IDs, and feedback fields. The formal A800 experiments in this paper use a 24{,}000/2{,}400/2{,}400 train/dev/test split. The current synthetic split contains non-trivial support for all three timing classes; on the held-out synthetic test set, the label counts are 1331 \texttt{none}, 895 \texttt{delay}, and 174 \texttt{immediate} windows. Synthetic labels are still rule-generated, so this source is valuable for cold-start training and sanity checks, but it is not a substitute for real user outcomes.
 
+\subsection{Tri-Modal Synthetic Emotion Benchmark}
+To strengthen the perception layer requested in the advisor discussion, we add a second synthetic benchmark specialized for fine-grained emotion understanding from face, motion, and audio. This benchmark contains 120{,}000/12{,}000/12{,}000 train/dev/test windows, each with synchronized face, motion, and audio sequences, a 12-way fine-grained emotion label, continuous valence-arousal targets, and auxiliary latent-state targets. It is explicitly a controlled pretraining and ablation benchmark rather than a proxy for in-the-wild performance, but it lets us test whether tri-modal fusion is materially better than single-modality emotion estimation before plugging those outputs into the proactive care stack.
+
 \subsection{Weak-Label}
 The weak-label branch is extracted from the deployed legacy system logs in \texttt{auth.db}. We align timestamped \texttt{emotion\_events} with \texttt{chat\_messages} and convert them into partially supervised windows with persona priors, context flags, latent state surrogates, timing labels, strategy labels, and heuristic feedback. The source database contains 656 emotion events and 2838 chat messages. After conversion and chronological splitting, the current weak-label release contains 286/61/62 train/dev/test episodes. We also implemented a parser for structured \texttt{CarePlanReady} bridge logs, but those records are currently too few and too noisy to serve as the default training source, so the main reported weak-label results use the database-only branch.
 
@@ -19,6 +22,7 @@ The real pilot is intentionally separated from the current quantitative section.
 Source & Split Size & Supervision & Status \\
 \midrule
 Synthetic & 24000/2400/2400 & state/timing/strategy & reported \\
+Tri-modal synthetic emotion & 120000/12000/12000 & emotion/valence/arousal/state & reported \\
 Weak-label & 286/61/62 & timing/strategy/feedback & reported \\
 Real pilot & -- & human feedback & pending \\
 \bottomrule

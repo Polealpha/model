@@ -5,10 +5,12 @@
 This repository now has a complete stage-1 research prototype for proactive emotional care timing:
 
 - synthetic benchmark generation
+- synthetic tri-modal fine-grained emotion benchmark
 - weaklabel extraction from `auth.db`
 - structured baseline
 - temporal multitask model
 - temporal joint timing-to-strategy model
+- tri-modal emotion model
 - dual-A800 training run
 - CVPR-style paper source
 - compiled PDF from the remote Linux server
@@ -21,6 +23,17 @@ Source tables:
 - `paper/tables/weaklabel_results.tex`
 
 Key numbers:
+
+- Tri-modal emotion / Synthetic 12-way benchmark:
+  - emotion accuracy: `97.59`
+  - emotion Macro-F1: `97.58`
+  - valence MAE: `0.068`
+  - arousal MAE: `0.055`
+  - state MAE: `0.053`
+- Tri-modal emotion ablations:
+  - face-only accuracy: `24.33`
+  - motion-only accuracy: `8.33`
+  - audio-only accuracy: `31.11`
 
 - Structured / Synthetic:
   - balanced accuracy: `85.56`
@@ -65,6 +78,7 @@ Important files:
 
 - `structured_baseline.pkl`
 - `structured_baseline_mixed.pkl`
+- `trimodal_emotion_model.pt`
 - `multitask_model.pt`
 - `multitask_mixed_model.pt`
 - `joint_model.pt`
@@ -73,6 +87,7 @@ Important files:
 
 - `structured_baseline.pkl`: `e822980d9acea39f19a69109c8ee1f8de753dc5ebc25e5d4e47c13f7ffbd01bb`
 - `structured_baseline_mixed.pkl`: `249bc1cbf84e9fa843210767267bf6894a1956894ccca7289274852a2d62e24f`
+- `trimodal_emotion_model.pt`: `0d8d241714f72dd414ff2c17a40f27a2a5649b356e171fd9ce31792eafbc79d0`
 - `multitask_model.pt`: `8062162782a215e11aefeb8acd33cbf13f48ac5eb39104069dbfce605eaae2d0`
 - `multitask_mixed_model.pt`: `7ca0bd4097ef94f723bd6793e0e93e08c2dab2af84ffa6d378fa3c0ef4e006a8`
 - `joint_model.pt`: `056b3ac9ade4351b84f8191ddda82cc988e0e9a5521487604cc8ad93d01db2c7`
@@ -80,6 +95,7 @@ Important files:
 ## What Is Strong Enough To Claim
 
 - the task decomposition is implemented end-to-end
+- the repo now has an upstream tri-modal face+motion+audio emotion encoder benchmark
 - the repository supports synthetic plus weaklabel bootstrapping
 - the temporal descriptor backbone trains successfully on dual A800 GPUs
 - the joint branch is the strongest current offline timing model

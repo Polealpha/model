@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useRef, useState } from "react";
-import { ChatAttachment, ChatMessage, EmotionType } from "../types";
+import { ActiveCareFeedbackLabel, ChatAttachment, ChatMessage, EmotionType } from "../types";
 import { Send, Sparkles, User, Bot, Activity, Paperclip, X, Mic, Square, LoaderCircle, Volume2 } from "lucide-react";
 import { generateAssistantMessage, generateAssistantMessageStream } from "../services/llmService";
 import { uploadChatAttachment } from "../services/chatService";
@@ -10,6 +10,7 @@ interface ChatInterfaceProps {
   currentEmotion: EmotionType;
   initialMessages?: ChatMessage[];
   onSendMessage?: (msg: ChatMessage) => void;
+  onActiveCareFeedback?: (msg: ChatMessage, feedback: ActiveCareFeedbackLabel) => void | Promise<void>;
   isGuest?: boolean;
   variant?: "default" | "compact";
   voiceState?: "idle" | "detecting" | "listening" | "thinking" | "speaking";
@@ -147,6 +148,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   currentEmotion,
   initialMessages = [],
   onSendMessage,
+  onActiveCareFeedback,
   isGuest = false,
   variant = "default",
   voiceState = "idle",
@@ -184,6 +186,22 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
   const [assistantRuntime, setAssistantRuntime] = useState<AssistantRuntimeStatus | null>(null);
   const [assistantRuntimeError, setAssistantRuntimeError] = useState("");
+
+  const submitActiveCareFeedback = async (message: ChatMessage, feedback: ActiveCareFeedbackLabel) => {
+    const latencyMs = Math.max(0, Date.now() - message.timestamp.getTime());
+    const nextMessage: ChatMessage = {
+      ...message,
+      feedbackState: feedback,
+      feedbackLatencyMs: latencyMs,
+    };
+    setMessages((prev) => prev.map((item) => (item.id === message.id ? nextMessage : item)));
+    if (!onActiveCareFeedback) return;
+    try {
+      await onActiveCareFeedback(nextMessage, feedback);
+    } catch (error) {
+      console.warn("active care feedback failed", error);
+    }
+  };
 
   useEffect(() => {
     const next = initialMessages.filter((msg) => hasRenderableContent(msg));
@@ -798,6 +816,41 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
               <span className="text-[9px] font-bold text-slate-600 px-2 mt-1">
                 {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </span>
+              {msg.isActiveCare && onActiveCareFeedback && !msg.feedbackState && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => void submitActiveCareFeedback(msg, "accepted")}
+                    className="px-2 py-1 rounded-full border border-emerald-400/20 bg-emerald-500/10 text-[9px] font-black uppercase tracking-wider text-emerald-200 hover:bg-emerald-500/20"
+                  >
+                    有帮助
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void submitActiveCareFeedback(msg, "ignored")}
+                    className="px-2 py-1 rounded-full border border-slate-400/20 bg-slate-700/30 text-[9px] font-black uppercase tracking-wider text-slate-200 hover:bg-slate-700/50"
+                  >
+                    暂时不用
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void submitActiveCareFeedback(msg, "annoyed")}
+                    className="px-2 py-1 rounded-full border border-rose-400/20 bg-rose-500/10 text-[9px] font-black uppercase tracking-wider text-rose-200 hover:bg-rose-500/20"
+                  >
+                    被打扰
+                  </button>
+                </div>
+              )}
+              {msg.isActiveCare && msg.feedbackState && (
+                <span className="px-2 mt-1 text-[9px] font-bold text-slate-500">
+                  已反馈：
+                  {msg.feedbackState === "accepted"
+                    ? "有帮助"
+                    : msg.feedbackState === "ignored"
+                      ? "暂时不用"
+                      : "被打扰"}
+                </span>
+              )}
               {msg.sender !== "user" && hasRenderableText(msg.text) && speechSupported && (
                 <button
                   type="button"

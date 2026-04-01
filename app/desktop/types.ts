@@ -10,6 +10,7 @@ export enum EmotionType {
 export type EngineMode = "normal" | "privacy" | "dnd";
 export type CareDeliveryStrategy = "policy" | "voice_all_day" | "popup_all_day";
 export type AssistantMode = "product" | "agent";
+export type ActiveCareFeedbackLabel = "accepted" | "ignored" | "annoyed";
 
 export interface RiskScores {
   V: number;
@@ -159,6 +160,10 @@ export interface ChatMessage {
   contentType?: "text" | "image" | "video" | "mixed" | "system";
   attachments?: ChatAttachment[];
   isActiveCare?: boolean;
+  activeCareKind?: "product" | "research";
+  researchSampleId?: string | null;
+  feedbackState?: ActiveCareFeedbackLabel | null;
+  feedbackLatencyMs?: number | null;
 }
 
 export interface UserProfile {

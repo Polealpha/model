@@ -1,0 +1,28 @@
+trimodal_synthetic:
+  seed: 42
+  train_size: 120000
+  dev_size: 12000
+  test_size: 12000
+  sequence_steps: 48
+  face_dim: 10
+  motion_dim: 10
+  audio_dim: 10
+  persona_dim: 6
+
+trimodal_model:
+  batch_size: 512
+  hidden_dim: 384
+  epochs: 22
+  lr: 0.0003
+  weight_decay: 0.0001
+  dropout: 0.1
+  num_layers: 4
+  num_heads: 8
+  label_smoothing: 0.05
+  va_loss_weight: 0.6
+  state_loss_weight: 0.4
+  support_loss_weight: 0.2
+  grad_clip: 1.0
+  seed: 42
+  device: cuda
+  multi_gpu: true
