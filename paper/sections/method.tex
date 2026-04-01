@@ -20,6 +20,9 @@ In the current repository release, however, $E_v$ and $E_a$ are instantiated as 
 \subsection{Tri-Modal Emotion Encoder}
 Following the advisor recommendation to separate perception from intervention logic, we add a dedicated tri-modal emotion encoder before the timing model. The encoder takes synchronized face, motion, and audio sequences and predicts a 12-way fine-grained emotion label together with valence, arousal, and auxiliary latent-state targets. Each modality uses its own temporal encoder, after which pooled modality features and a persona token are fused for multi-task prediction. In the current release this encoder is trained only on the synthetic tri-modal benchmark, so it should be understood as an upstream controlled benchmark rather than a deployed perception stack.
 
+\subsection{Tri-Modal Care Relation Model}
+On top of the tri-modal encoder, we train a second relation model for the question raised in the advisor meeting: given multimodal affect cues and a persona prior, does this person currently need care, and if so should the system intervene now or later? This model reuses the pretrained tri-modal encoders, adds a binary care-need head, a three-way care-timing head, and continuous support-need regression, while retaining auxiliary emotion, valence-arousal, and latent-state supervision during finetuning.
+
 \subsection{Temporal Descriptor Backbone}
 The current neural backbone projects each temporal step into a hidden space, applies a shallow temporal convolution block, then refines the sequence with a transformer encoder. Mean pooling and max pooling over time are concatenated with persona and context embeddings, yielding a fused feature vector used by all prediction heads. This design is intentionally lightweight enough for rapid cold-start experimentation while still exercising GPU-based temporal modeling on the A800 training server.
 

@@ -1,0 +1,297 @@
+{
+  "model": "trimodal_care",
+  "metrics": {
+    "train": {
+      "care_need_accuracy": 0.974025,
+      "care_need_balanced_accuracy": 0.9663116513585255,
+      "care_need_precision": 0.9665088128038898,
+      "care_need_recall": 0.9938544067289038,
+      "care_need_f1": 0.979990884522304,
+      "care_need_auroc": 0.9953364399086042,
+      "timing_accuracy": 0.9375666666666667,
+      "timing_balanced_accuracy": 0.941289749769259,
+      "timing_macro_f1": 0.9366779376676905,
+      "support_need_mae": 0.058787744492292404,
+      "valence_mae": 0.0688236653804779,
+      "arousal_mae": 0.05725643038749695,
+      "state_mae": 0.06465450674295425,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9931020793012754,
+          "recall": 0.980475735528282,
+          "f1": 0.9867485176830245,
+          "support": 40821.0
+        },
+        "delay": {
+          "precision": 0.8382585553240102,
+          "recall": 0.9696784874096018,
+          "f1": 0.8991920280096957,
+          "support": 34431.0
+        },
+        "immediate": {
+          "precision": 0.98063658481527,
+          "recall": 0.8737150263698936,
+          "f1": 0.9240932673103514,
+          "support": 44748.0
+        }
+      }
+    },
+    "dev": {
+      "care_need_accuracy": 0.9748333333333333,
+      "care_need_balanced_accuracy": 0.967313482092929,
+      "care_need_precision": 0.967292089249493,
+      "care_need_recall": 0.9942663539223352,
+      "care_need_f1": 0.9805937540161933,
+      "care_need_auroc": 0.9957355811500813,
+      "timing_accuracy": 0.9330833333333334,
+      "timing_balanced_accuracy": 0.9374611012560887,
+      "timing_macro_f1": 0.9319918920645535,
+      "support_need_mae": 0.059149328619241714,
+      "valence_mae": 0.06800726056098938,
+      "arousal_mae": 0.05754842236638069,
+      "state_mae": 0.06454011797904968,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9950285856326124,
+          "recall": 0.977294921875,
+          "f1": 0.9860820298066264,
+          "support": 4096.0
+        },
+        "delay": {
+          "precision": 0.8245658192801409,
+          "recall": 0.9686575990538143,
+          "f1": 0.8908225696804895,
+          "support": 3382.0
+        },
+        "immediate": {
+          "precision": 0.9785214785214785,
+          "recall": 0.8664307828394515,
+          "f1": 0.9190710767065446,
+          "support": 4522.0
+        }
+      }
+    },
+    "test": {
+      "care_need_accuracy": 0.9720833333333333,
+      "care_need_balanced_accuracy": 0.9643731062745956,
+      "care_need_precision": 0.9653992395437262,
+      "care_need_recall": 0.9919260320354213,
+      "care_need_f1": 0.9784828826514227,
+      "care_need_auroc": 0.9944857681780686,
+      "timing_accuracy": 0.94075,
+      "timing_balanced_accuracy": 0.9440443931276228,
+      "timing_macro_f1": 0.9400018968415657,
+      "support_need_mae": 0.05847307667136192,
+      "valence_mae": 0.06825776398181915,
+      "arousal_mae": 0.05730743333697319,
+      "state_mae": 0.06482560187578201,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9935387673956262,
+          "recall": 0.9813451153657339,
+          "f1": 0.9874042973573722,
+          "support": 4074.0
+        },
+        "delay": {
+          "precision": 0.8475043892651116,
+          "recall": 0.9706980752657283,
+          "f1": 0.9049276914836636,
+          "support": 3481.0
+        },
+        "immediate": {
+          "precision": 0.9806969165204312,
+          "recall": 0.8800899887514061,
+          "f1": 0.9276737016836614,
+          "support": 4445.0
+        }
+      }
+    },
+    "ablations": {
+      "face_only": {
+        "care_need_accuracy": 0.95825,
+        "care_need_balanced_accuracy": 0.9445573740047719,
+        "care_need_precision": 0.9441831683168317,
+        "care_need_recall": 0.9934887355124365,
+        "care_need_f1": 0.9682086426803731,
+        "care_need_auroc": 0.9883186167102644,
+        "timing_accuracy": 0.6060833333333333,
+        "timing_balanced_accuracy": 0.642812977629078,
+        "timing_macro_f1": 0.5187578101454351,
+        "support_need_mae": 0.07252269238233566,
+        "valence_mae": 0.19315177202224731,
+        "arousal_mae": 0.38572579622268677,
+        "state_mae": 0.24220728874206543,
+        "timing_per_class": {
+          "none": {
+            "precision": 0.9854033290653009,
+            "recall": 0.944526264113893,
+            "f1": 0.9645318962275975,
+            "support": 4074.0
+          },
+          "delay": {
+            "precision": 0.423100679431748,
+            "recall": 0.983912668773341,
+            "f1": 0.5917415342087077,
+            "support": 3481.0
+          },
+          "immediate": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 4445.0
+          }
+        }
+      },
+      "motion_only": {
+        "care_need_accuracy": 0.3600833333333333,
+        "care_need_balanced_accuracy": 0.5,
+        "care_need_precision": 0.0,
+        "care_need_recall": 0.0,
+        "care_need_f1": 0.0,
+        "care_need_auroc": 0.5189367793739778,
+        "timing_accuracy": 0.3395,
+        "timing_balanced_accuracy": 0.3333333333333333,
+        "timing_macro_f1": 0.16896852059226078,
+        "support_need_mae": 0.37423574924468994,
+        "valence_mae": 0.38895824551582336,
+        "arousal_mae": 0.4901984930038452,
+        "state_mae": 0.2571435868740082,
+        "timing_per_class": {
+          "none": {
+            "precision": 0.3395,
+            "recall": 1.0,
+            "f1": 0.5069055617767824,
+            "support": 4074.0
+          },
+          "delay": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3481.0
+          },
+          "immediate": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 4445.0
+          }
+        }
+      },
+      "audio_only": {
+        "care_need_accuracy": 0.3600833333333333,
+        "care_need_balanced_accuracy": 0.5,
+        "care_need_precision": 0.0,
+        "care_need_recall": 0.0,
+        "care_need_f1": 0.0,
+        "care_need_auroc": 0.7984207599304168,
+        "timing_accuracy": 0.3395,
+        "timing_balanced_accuracy": 0.3333333333333333,
+        "timing_macro_f1": 0.16896852059226078,
+        "support_need_mae": 0.3504306972026825,
+        "valence_mae": 0.3374598026275635,
+        "arousal_mae": 0.11583010107278824,
+        "state_mae": 0.23922447860240936,
+        "timing_per_class": {
+          "none": {
+            "precision": 0.3395,
+            "recall": 1.0,
+            "f1": 0.5069055617767824,
+            "support": 4074.0
+          },
+          "delay": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3481.0
+          },
+          "immediate": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 4445.0
+          }
+        }
+      }
+    }
+  },
+  "config": {
+    "batch_size": 512,
+    "hidden_dim": 384,
+    "epochs": 16,
+    "lr": 0.0002,
+    "weight_decay": 0.0001,
+    "dropout": 0.1,
+    "num_layers": 4,
+    "num_heads": 8,
+    "timing_loss_weight": 0.8,
+    "support_loss_weight": 0.4,
+    "emotion_loss_weight": 0.25,
+    "va_loss_weight": 0.2,
+    "state_loss_weight": 0.2,
+    "grad_clip": 1.0,
+    "device": "cuda",
+    "multi_gpu": true,
+    "seed": 42
+  },
+  "dataset_manifest": {
+    "config": {
+      "seed": 42,
+      "train_size": 120000,
+      "dev_size": 12000,
+      "test_size": 12000,
+      "sequence_steps": 48,
+      "face_dim": 10,
+      "motion_dim": 10,
+      "audio_dim": 10,
+      "persona_dim": 6
+    },
+    "counts": {
+      "train": 120000,
+      "dev": 12000,
+      "test": 12000
+    },
+    "fine_emotion_labels": [
+      "neutral",
+      "calm",
+      "content",
+      "joy",
+      "relief",
+      "tired",
+      "sadness",
+      "lonely",
+      "anxiety",
+      "frustration",
+      "anger",
+      "overwhelmed"
+    ],
+    "state_targets": [
+      "stress",
+      "fatigue",
+      "attention_drop",
+      "suppression"
+    ]
+  },
+  "training_summary": {
+    "loss_history": [
+      0.275185978269577,
+      0.20953804900646208,
+      0.20606447803179423,
+      0.20487257005373638,
+      0.20506704346338908,
+      0.20348527074654896,
+      0.2043968643029531,
+      0.20306226986249287,
+      0.20211845564047495,
+      0.20180340515772502,
+      0.20362841568787893,
+      0.20260869778792062,
+      0.20565101834932964,
+      0.20428847767512004,
+      0.19994858293533324,
+      0.2019921769618988
+    ],
+    "device": "cuda",
+    "device_count": 2
+  },
+  "pretrained": "/root/lunwen_run/lunwen/training/artifacts/trimodal_emotion_model.pt"
+}

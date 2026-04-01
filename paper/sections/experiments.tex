@@ -24,5 +24,10 @@ Held-out weaklabel performance remains the hardest setting. The exploratory join
 
 The new tri-modal benchmark tests the perception layer in isolation. Full fusion reaches 97.59\% accuracy and 97.58\% Macro-F1 on the held-out synthetic benchmark, while also keeping valence MAE at 0.068 and arousal MAE at 0.055. The ablations are more informative than the headline number: face-only, motion-only, and audio-only settings collapse to 24.33\%, 8.33\%, and 31.11\% accuracy, respectively. On this controlled benchmark, fusion is not a marginal gain but the core source of performance.
 
+\subsection{Tri-Modal Care Relation Benchmark}
+\input{tables/trimodal_care_results}
+
+The second tri-modal benchmark asks a harder question: can the same multimodal encoder predict whether the user needs care and whether the appropriate action is \texttt{none}, \texttt{delay}, or \texttt{immediate}? Full fusion reaches 99.45\% care-need AUROC, 97.85\% care-need F1, and 94.00\% care-timing Macro-F1. The ablations reveal a more nuanced picture than in the emotion benchmark. Face-only remains surprisingly strong for binary care-need prediction, but its timing Macro-F1 drops to 51.88\%, while motion-only and audio-only collapse almost entirely. On this synthetic benchmark, binary concern detection is easier than timing-specific intervention planning, and full fusion matters more for the latter.
+
 \subsection{Status Audit}
 \input{tables/audit_table}

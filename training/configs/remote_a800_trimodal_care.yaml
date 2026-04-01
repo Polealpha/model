@@ -1,0 +1,18 @@
+trimodal_care_model:
+  batch_size: 512
+  hidden_dim: 384
+  epochs: 16
+  lr: 0.0002
+  weight_decay: 0.0001
+  dropout: 0.1
+  num_layers: 4
+  num_heads: 8
+  timing_loss_weight: 0.8
+  support_loss_weight: 0.4
+  emotion_loss_weight: 0.25
+  va_loss_weight: 0.2
+  state_loss_weight: 0.2
+  grad_clip: 1.0
+  seed: 42
+  device: cuda
+  multi_gpu: true

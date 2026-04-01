@@ -9,6 +9,7 @@ Component & Status & Evidence / Interpretation \\
 \midrule
 Synthetic benchmark & Complete & Train/dev/test JSONL datasets and reproducible generators are in the repository and are used in all reported experiments. \\
 Tri-modal emotion benchmark & Complete (synthetic only) & Dual-A800 training confirms strong synthetic fusion performance, but this benchmark is still controlled and not a real-world perception claim. \\
+Tri-modal care relation model & Complete (synthetic only) & Dual-A800 training confirms that multimodal affect cues can map to synthetic care need and care timing, but this is still not evidence of real-user intervention validity. \\
 Weak-label extraction & Complete & \texttt{auth.db} logs are converted into 286/61/62 weak-label train/dev/test episodes and used in the mixed experiments. \\
 Structured baseline & Complete & Trained and evaluated; it remains a strong sanity baseline and a useful transfer comparison against the temporal models. \\
 Temporal multitask model & Complete & Trained on both synthetic-only and synthetic+weaklabel regimes; this is the main state-prediction branch and a competitive neural timing baseline. \\

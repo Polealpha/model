@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Synthetic tri-modal care-need and care-timing benchmark. Full fusion uses face, motion, and audio together; ablations zero out the other two modalities at test time. All classification numbers are percentages.}
+\label{tab:trimodal-care-results}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Model & Need AUROC & Need F1 & Timing Macro-F1 & Support MAE \\
+\midrule
+Full tri-modal & 99.45 & 97.85 & 94.00 & 0.058 \\
+Face only & 98.83 & 96.82 & 51.88 & 0.073 \\
+Motion only & 51.89 & 0.00 & 16.90 & 0.374 \\
+Audio only & 79.84 & 0.00 & 16.90 & 0.350 \\
+\bottomrule
+\end{tabular}
+\end{table}
