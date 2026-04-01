@@ -1,0 +1,68 @@
+[
+  {
+    "setting": "synthetic_only",
+    "structured": {
+      "timing_accuracy": 0.9125,
+      "timing_balanced_accuracy": 0.6164463555767904,
+      "timing_macro_f1": 0.6037411719793854,
+      "strategy_accuracy": 0.7333333333333333,
+      "strategy_macro_f1": 0.4481397497270513
+    },
+    "multitask": {
+      "timing_accuracy": 0.875,
+      "timing_balanced_accuracy": 0.5867972607103041,
+      "timing_macro_f1": 0.5760603276680447
+    },
+    "joint": {
+      "timing_accuracy": 0.8375,
+      "timing_balanced_accuracy": 0.5307108350586611,
+      "timing_macro_f1": 0.538059163059163,
+      "strategy_accuracy": 0.85,
+      "strategy_macro_f1": 0.8555555555555555
+    }
+  },
+  {
+    "setting": "synthetic_plus_weaklabel_on_synth_test",
+    "structured": {
+      "timing_accuracy": 0.9125,
+      "timing_balanced_accuracy": 0.6164463555767904,
+      "timing_macro_f1": 0.6037411719793854,
+      "strategy_accuracy": 0.9166666666666666,
+      "strategy_macro_f1": 0.9270154951717943
+    },
+    "multitask": {
+      "timing_accuracy": 0.8791666666666667,
+      "timing_balanced_accuracy": 0.5910707649838085,
+      "timing_macro_f1": 0.5793599287395813
+    },
+    "joint": {
+      "timing_accuracy": 0.8541666666666666,
+      "timing_balanced_accuracy": 0.5500079630514413,
+      "timing_macro_f1": 0.5540234560368789,
+      "strategy_accuracy": 0.8666666666666667,
+      "strategy_macro_f1": 0.8769230769230769
+    }
+  },
+  {
+    "setting": "synthetic_plus_weaklabel_on_weaklabel_test",
+    "structured": {
+      "timing_accuracy": 1.0,
+      "timing_balanced_accuracy": 1.0,
+      "timing_macro_f1": 1.0,
+      "strategy_accuracy": 1.0,
+      "strategy_macro_f1": 1.0
+    },
+    "multitask": {
+      "timing_accuracy": 1.0,
+      "timing_balanced_accuracy": 1.0,
+      "timing_macro_f1": 1.0
+    },
+    "joint": {
+      "timing_accuracy": 1.0,
+      "timing_balanced_accuracy": 1.0,
+      "timing_macro_f1": 1.0,
+      "strategy_accuracy": 1.0,
+      "strategy_macro_f1": 1.0
+    }
+  }
+]

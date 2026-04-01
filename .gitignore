@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# Node
+node_modules/
+dist/
+release/
+release-*/
+
+# Data and outputs
+datasets/synthetic/*.jsonl
+datasets/processed/*
+datasets/splits/*.json
+reports/generated/*
+outputs/
+training/artifacts/*.pt
+training/artifacts/*.pkl
+
+# Paper build
+paper/build/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.pdf
+
+# Local artifacts already present in workspace
+captcha_current.png
+captcha_test.png
+guard_page.html
+guard_summary.txt
+login_session_meta.json
+luna_page.html
+snippet_checkLogin.txt
+snippet_connect_login_to=.txt
+snippet_exchangeConnectToken.txt
+snippet_login_to.txt
+snippet_oid.txt

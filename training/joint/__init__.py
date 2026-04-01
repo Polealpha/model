@@ -1,0 +1,2 @@
+"""Joint timing-strategy model."""
+

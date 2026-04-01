@@ -1,0 +1,8 @@
+{
+  "timing_accuracy": 0.9125,
+  "timing_balanced_accuracy": 0.6164463555767904,
+  "timing_macro_f1": 0.6037411719793854,
+  "strategy_accuracy": 0.7333333333333333,
+  "strategy_macro_f1": 0.4481397497270513,
+  "artifact_kind": "structured"
+}

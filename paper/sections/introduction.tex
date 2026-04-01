@@ -1,0 +1,16 @@
+\section{Introduction}
+People do not always want help when they look tired, distracted, or distressed. In proactive emotional care, the central failure mode is often not missing affect altogether, but interrupting at the wrong time or with the wrong tone. A robot or embodied assistant therefore needs to distinguish vulnerability from receptivity, and then map a receptive moment to an appropriately light-weight support strategy \cite{mrt2022,mrt2023,jmir2021}.
+
+This distinction matters because naturalistic affect understanding is itself multimodal and temporally structured. Recent work on video emotion localization, masked affective representation learning, and multimodal in-situ affect datasets shows that passive state estimation benefits from temporal cues and real-world context rather than single-frame expression classification \cite{wsvd2023,mart2024,kemocon2020,kemophone2023,stressid2023}. At the same time, emotional support dialogue research shows that the first supportive move should be strategy-aware and repairable rather than a one-shot free-form response \cite{esc2021,lookahead2022,pal2023,traitsempathy2025}.
+
+We therefore formulate proactive emotional care as a three-stage problem: given a passive 60-second observation window, estimate latent affective state, predict whether intervention should happen now, later, or not at all, and if intervention is allowed, select a strategy token that can be converted into a short confirmation-aware utterance. Instead of claiming a fully solved end-to-end system, we treat this as a benchmarkable research problem with clear cold-start constraints.
+
+The current paper makes four concrete contributions.
+\begin{itemize}[leftmargin=1.3em]
+  \item We define a structured task interface that separates latent state estimation, intervention receptivity prediction, and strategy-conditioned support generation.
+  \item We instantiate a cold-start dataset protocol that combines a synthetic benchmark with weak labels extracted from historical product logs, while keeping a real-pilot protocol explicitly out of scope for the current results.
+  \item We implement three reproducible baselines: a structured sanity baseline, a temporal multitask timing-plus-state model, and an exploratory joint timing-to-strategy model with a constrained utterance composer.
+  \item We report the first complete offline results for this repository and show that weak-label bootstrapping is feasible but still noisy: synthetic three-class timing can now be learned reliably, but held-out weaklabel generalization remains limited and exposes the gap that a future raw-video backbone and real pilot must close.
+\end{itemize}
+
+The current evidence supports a prototype benchmark and training pipeline, not a top-line deployment claim. We keep that boundary explicit throughout the paper.

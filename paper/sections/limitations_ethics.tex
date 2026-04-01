@@ -1,0 +1,8 @@
+\section{Limitations and Ethics}
+This project is not a medical diagnosis system and must not be framed as one. The current models estimate timing and support strategy for a proactive assistant under consent; they do not detect disorders, replace counseling, or justify clinical claims.
+
+The largest technical limitation is also the largest scientific limitation: the current neural pipeline still operates on temporal descriptors rather than raw video and audio. That means the paper can support a claim about a prototype receptivity benchmark and an end-to-end trainable temporal baseline, but not yet a claim about end-to-end multimodal perception in the wild.
+
+The second limitation is supervision quality. Synthetic labels are rule-generated and weak labels are reconstructed from historical product events and messages. Those sources are valuable for bootstrapping, but they are noisy and partially circular. Real-pilot data is therefore mandatory before any stronger claim about real-user benefit, annoyance reduction, or personalization.
+
+From an ethics standpoint, the system should default to minimal retention, short-window feature storage, user-controlled cooldowns, and an explicit opt-out path. When uncertainty is high, the safer action is to delay or remain silent rather than to force an intervention.

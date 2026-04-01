@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Status audit for the current release. This table separates validated components from pending ones so the paper can state precisely what has been established and what remains incomplete.}
+\label{tab:audit}
+\small
+\begin{tabular}{p{0.24\linewidth}p{0.16\linewidth}p{0.54\linewidth}}
+\toprule
+Component & Status & Evidence / Interpretation \\
+\midrule
+Synthetic benchmark & Complete & Train/dev/test JSONL datasets and reproducible generators are in the repository and are used in all reported experiments. \\
+Weak-label extraction & Complete & \texttt{auth.db} logs are converted into 286/61/62 weak-label train/dev/test episodes and used in the mixed experiments. \\
+Structured baseline & Complete & Trained and evaluated; it remains a strong sanity baseline and a useful transfer comparison against the temporal models. \\
+Temporal multitask model & Complete & Trained on both synthetic-only and synthetic+weaklabel regimes; this is the main state-prediction branch and a competitive neural timing baseline. \\
+Joint timing-to-strategy model & Exploratory but reported & Trained and evaluated; it is currently the strongest offline timing branch, but weaklabel strategy generalization remains low. \\
+Raw video backbone & Pending & The current release still uses temporal descriptors rather than raw frame or waveform encoders. \\
+Real pilot / human study & Pending & No human evaluation results are reported yet, so claims must remain offline and non-clinical. \\
+Top-line deployment claim & Not allowed & Current evidence does not support claims about real-user efficacy, cross-scene robustness, or therapeutic benefit. \\
+\bottomrule
+\end{tabular}
+\end{table*}

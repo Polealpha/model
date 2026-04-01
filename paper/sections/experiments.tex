@@ -1,0 +1,23 @@
+\section{Experiments}
+This section reports the results that are actually supported by the current repository release. We evaluate synthetic-only training and synthetic-plus-weaklabel training. Real-pilot and raw-video experiments remain out of scope for this version.
+
+\subsection{Metrics}
+Timing prediction is evaluated with accuracy, balanced accuracy, macro-F1, and per-class precision/recall/F1. Because the timing labels are imbalanced, balanced accuracy and macro-F1 are the primary metrics. Strategy prediction is evaluated with strategy accuracy and strategy macro-F1. For the multitask model, we additionally report state MAE.
+
+\subsection{Protocol}
+The formal experiments reported here were trained on two NVIDIA A800 80GB GPUs using the \texttt{remote\_a800.yaml} setting. Synthetic training uses a 24{,}000/2{,}400/2{,}400 split; mixed training augments the synthetic train split with 286 weak-label training episodes extracted from historical logs and evaluates on both the held-out synthetic split and the held-out weaklabel split. The bridge-log parser is implemented but not included in the main experiments because its current volume is too small for stable training conclusions.
+
+Two caveats are essential for interpreting the tables. First, the synthetic benchmark is now a real three-class task, but it is still rule-generated and therefore measures rule-recovery plus temporal generalization rather than natural in-the-wild behavior. Second, the combined test columns in Table~\ref{tab:main-results} merge the 2{,}400-window synthetic test set with the 62-window weaklabel test set, so they are dominated by synthetic windows and should be treated as aggregate diagnostics rather than as a proxy for real-world robustness.
+
+\subsection{Main Results}
+\input{tables/main_results}
+
+Three findings are robust across the current runs. First, on the held-out synthetic split the temporal models are now credible three-class timing baselines, and the joint branch is strongest overall at 86.90\% balanced accuracy and 81.06\% timing Macro-F1, with the structured sanity baseline close behind at 85.56\% and 79.11\%. Second, mixed training improves the aggregate offline numbers for the joint branch, but the combined columns remain synthetic-heavy; the strongest held-out weaklabel timing Macro-F1 is still only 36.29\%. Third, the multitask branch remains important because it is the only current model that predicts latent state directly, reaching a state MAE of 0.069 on synthetic-only training and 0.083 under mixed training.
+
+\subsection{Weaklabel Generalization}
+\input{tables/weaklabel_results}
+
+Held-out weaklabel performance remains the hardest setting. The exploratory joint model is strongest on weaklabel timing Macro-F1 at 36.29\%, the structured baseline reaches 27.29\%, and the multitask model drops to 7.62\%. Strategy transfer is weaker still: the best held-out weaklabel strategy Macro-F1 is only 22.50\% from the structured baseline, while the joint model reaches 18.06\%. These numbers are useful as a bootstrapping signal, not as proof of real-world robustness. They mainly quantify the current synthetic-to-log mismatch and motivate future raw-video ingestion, stronger weaklabel reconstruction, and real-pilot collection.
+
+\subsection{Status Audit}
+\input{tables/audit_table}

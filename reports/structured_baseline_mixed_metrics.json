@@ -1,0 +1,149 @@
+{
+  "model": "structured",
+  "metrics": {
+    "train": {
+      "timing_accuracy": 0.8575310878695545,
+      "timing_balanced_accuracy": 0.8625541300585097,
+      "timing_macro_f1": 0.7911367596088098,
+      "strategy_accuracy": 0.8699662356913448,
+      "strategy_macro_f1": 0.7963388560668008,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9697954992726961,
+          "recall": 0.860069813325239,
+          "f1": 0.9116428715061331,
+          "support": 13178.0
+        },
+        "delay": {
+          "precision": 0.8478398983481575,
+          "recall": 0.8504514073287307,
+          "f1": 0.8491436449440586,
+          "support": 9415.0
+        },
+        "immediate": {
+          "precision": 0.4706814580031696,
+          "recall": 0.8771411695215594,
+          "f1": 0.6126237623762376,
+          "support": 1693.0
+        }
+      }
+    },
+    "dev": {
+      "timing_accuracy": 0.8549370174725721,
+      "timing_balanced_accuracy": 0.870713202785144,
+      "timing_macro_f1": 0.7915335249250296,
+      "strategy_accuracy": 0.8610321007720438,
+      "strategy_macro_f1": 0.7856552489313811,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9713322091062394,
+          "recall": 0.8539659006671608,
+          "f1": 0.9088757396449704,
+          "support": 1349.0
+        },
+        "delay": {
+          "precision": 0.8623348017621145,
+          "recall": 0.8446601941747572,
+          "f1": 0.8534059945504087,
+          "support": 927.0
+        },
+        "immediate": {
+          "precision": 0.4604904632152589,
+          "recall": 0.9135135135135135,
+          "f1": 0.6123188405797102,
+          "support": 185.0
+        }
+      }
+    },
+    "test": {
+      "timing_accuracy": 0.8456539398862714,
+      "timing_balanced_accuracy": 0.8381429477638119,
+      "timing_macro_f1": 0.7777900033056468,
+      "strategy_accuracy": 0.8606823720552397,
+      "strategy_macro_f1": 0.7898995002625359,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9746835443037974,
+          "recall": 0.8492647058823529,
+          "f1": 0.9076620825147348,
+          "support": 1360.0
+        },
+        "delay": {
+          "precision": 0.8286334056399133,
+          "recall": 0.8460686600221484,
+          "f1": 0.8372602739726027,
+          "support": 903.0
+        },
+        "immediate": {
+          "precision": 0.4591549295774648,
+          "recall": 0.8190954773869347,
+          "f1": 0.5884476534296029,
+          "support": 199.0
+        }
+      }
+    },
+    "synthetic_test": {
+      "timing_accuracy": 0.8570833333333333,
+      "timing_balanced_accuracy": 0.8498246698948485,
+      "timing_macro_f1": 0.787174361838901,
+      "strategy_accuracy": 0.8775,
+      "strategy_macro_f1": 0.8084260649872543,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9803586678052946,
+          "recall": 0.8625093914350113,
+          "f1": 0.9176658673061551,
+          "support": 1331.0
+        },
+        "delay": {
+          "precision": 0.8286334056399133,
+          "recall": 0.8536312849162011,
+          "f1": 0.840946615299945,
+          "support": 895.0
+        },
+        "immediate": {
+          "precision": 0.4723127035830619,
+          "recall": 0.8333333333333334,
+          "f1": 0.6029106029106029,
+          "support": 174.0
+        }
+      }
+    },
+    "weaklabel_test": {
+      "timing_accuracy": 0.4032258064516129,
+      "timing_balanced_accuracy": 0.32045977011494253,
+      "timing_macro_f1": 0.27291069342678137,
+      "strategy_accuracy": 0.20967741935483872,
+      "strategy_macro_f1": 0.22499999999999998,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.5,
+          "recall": 0.2413793103448276,
+          "f1": 0.32558139534883723,
+          "support": 29.0
+        },
+        "delay": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 8.0
+        },
+        "immediate": {
+          "precision": 0.375,
+          "recall": 0.72,
+          "f1": 0.4931506849315068,
+          "support": 25.0
+        }
+      }
+    }
+  },
+  "config": {
+    "max_iter": 1000,
+    "C": 2.0,
+    "seed": 42
+  },
+  "train_sources": {
+    "synthetic_train": 24000,
+    "weaklabel_train": 286
+  }
+}

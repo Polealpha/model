@@ -1,0 +1,7 @@
+{
+  "timing_accuracy": 0.8041666666666667,
+  "timing_balanced_accuracy": 0.5516005733397038,
+  "timing_macro_f1": 0.5321387940841866,
+  "state_mae": 0.12284015864133835,
+  "artifact_kind": "multitask"
+}

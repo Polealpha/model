@@ -1,0 +1,17 @@
+\section{Related Work}
+
+\subsection{Naturalistic Video and Multimodal Affective Understanding}
+Recent work moved affect recognition away from clean lab settings toward noisy, naturalistic observation. Video emotion localization and prediction models such as cross-modal temporal erasing and masked affective representation learning show that temporal structure and cross-modal cues matter \cite{wsvd2023,mart2024}. Datasets such as K-EmoCon and K-EmoPhone provide naturalistic affect labels, while StressID and embodied emotion benchmarks expose stress, attention, and other subtle states that are closer to proactive care than a single emotion label \cite{kemocon2020,kemophone2023,stressid2023,e3_2024}.
+
+\subsection{Beyond Emotion Categories}
+Proactive care depends on latent states like fatigue, stress, suppression, and workload, not only basic emotion categories. Prior work on fatigue and engagement estimation, depression-related non-verbal cues, and workplace emotional workload supports the use of a richer state vector for intervention timing \cite{fatigue2024,depressionframes2024,emowork2026}. These papers motivate intermediate supervision for state estimation.
+
+\subsection{Receptivity, Interruptibility, and Just-in-Time Adaptive Interventions}
+JITAI and MRT studies make a crucial distinction between need and receptivity. A user can be vulnerable but not receptive, or reachable but not receptive \cite{mrt2022,mrt2023,jmir2021,engagementmrt2022}. This line of work motivates a separate receptivity head, explicit cooldown logic, and intervention-time evaluation rather than pure affect classification.
+
+\subsection{Personality-Aware Affective Modeling}
+Personality changes how users express emotion and how they prefer support. Persona-aware emotional support generation and dynamic personality modeling suggest that a support policy should be conditioned on both a stable profile and a current context-dependent preference state \cite{pal2023,dynamicpersonality2024,traitsempathy2025,personatalks2025,mpdd2025}. Visual cues may also contribute to personality perception, which makes persona estimation a usable input rather than an external annotation only.
+
+\subsection{Emotional Support and Empathetic Generation}
+Emotional support dialogue work focuses on how to respond after a user already speaks up. The ESConv family, lookahead strategy planning, multi-stream emotional support modeling, and emotion-strategy integration provide strong references for response generation and strategy selection \cite{esc2021,lookahead2022,mffesc2024,emstremo2024,empdg2020,mime2020,avamerg2025}. Our task is earlier in the pipeline: deciding whether to speak at all, and only then selecting a support strategy.
+

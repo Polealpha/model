@@ -1,0 +1,36 @@
+{
+  "config": {
+    "train_size": 1200,
+    "dev_size": 240,
+    "test_size": 240,
+    "window_sec": 60,
+    "step_sec": 5,
+    "seed": 42
+  },
+  "counts": {
+    "train": 1200,
+    "dev": 240,
+    "test": 240
+  },
+  "label_space": {
+    "timing": [
+      "none",
+      "delay",
+      "immediate"
+    ],
+    "strategy": [
+      "observe",
+      "nudge",
+      "care",
+      "guard"
+    ],
+    "state": [
+      "valence",
+      "arousal",
+      "stress",
+      "fatigue",
+      "attention_drop",
+      "suppression"
+    ]
+  }
+}

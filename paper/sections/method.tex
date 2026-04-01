@@ -1,0 +1,42 @@
+\section{Method}
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.92\linewidth}{\centering Current implementation: temporal descriptor backbone + persona/context fusion.\\
+24-step visual/audio/posture descriptor sequence $\rightarrow$ fused latent representation $\rightarrow$ timing/state/strategy heads.}}
+\caption{Current repository implementation. The backbone operates on temporal descriptor sequences derived from observation windows. A raw-frame video backbone remains future work.}
+\label{fig:method}
+\end{figure}
+
+The ideal task formulation is
+\begin{align*}
+z_v &= E_v(\text{video}_{1:T}), \\
+z_a &= E_a(\text{audio}_{1:T}), \\
+z_p &= E_p(\persona), \\
+z_c &= E_c(\context), \\
+h &= F([z_v, z_a, z_p, z_c]).
+\end{align*}
+In the current repository release, however, $E_v$ and $E_a$ are instantiated as a temporal descriptor backbone rather than a raw-frame or waveform encoder. Each 60-second window is converted into a 24-step sequence of observation descriptors that summarize face presence, gaze aversion, head motion, posture slouch, fidget, silence, stress proxies, and receptivity proxies. Persona and context are encoded separately and fused with the temporal representation.
+
+\subsection{Temporal Descriptor Backbone}
+The current neural backbone projects each temporal step into a hidden space, applies a shallow temporal convolution block, then refines the sequence with a transformer encoder. Mean pooling and max pooling over time are concatenated with persona and context embeddings, yielding a fused feature vector used by all prediction heads. This design is intentionally lightweight enough for rapid cold-start experimentation while still exercising GPU-based temporal modeling on the A800 training server.
+
+\subsection{Heads}
+The multitask model predicts timing and latent state jointly:
+\[
+\mathcal{L}_{multi} = \lambda_r \mathcal{L}_{timing} + \lambda_s \mathcal{L}_{state}.
+\]
+The exploratory joint model adds strategy and template heads:
+\[
+\mathcal{L}_{joint} = \lambda_r \mathcal{L}_{timing} + \lambda_g \mathcal{L}_{strategy} + \lambda_u \mathcal{L}_{template}.
+\]
+Timing is a three-way decision over \texttt{none}, \texttt{delay}, and \texttt{immediate}. Strategy is a four-way decision over \texttt{observe}, \texttt{nudge}, \texttt{care}, and \texttt{guard}. The template head does not generate free-form language end to end. Instead, it selects a constrained utterance sketch that is later converted into a short confirmation-aware first contact.
+
+\subsection{Baselines}
+We evaluate three implemented baselines.
+\begin{itemize}[leftmargin=1.3em]
+  \item \texttt{Structured baseline}: logistic models over hand-crafted persona, context, and observation features.
+  \item \texttt{Temporal multitask}: a descriptor-sequence backbone with timing and state heads.
+  \item \texttt{Temporal joint}: the same backbone with timing, strategy, and template heads.
+\end{itemize}
+
+This naming matters. The current neural baselines are temporal and multimodal in the sense of fusing visual/audio/posture descriptors with persona and context, but they are not yet raw-video end-to-end models. We keep that boundary explicit in the paper and in the release audit.

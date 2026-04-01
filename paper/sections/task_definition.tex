@@ -1,0 +1,21 @@
+\section{Task Definition}
+Let an observation window be an \texttt{EpisodeWindowV1} sample with synchronized video, audio, persona, and context fields. We use the notation $x_t = (\text{video}_t, \text{audio}_t, \context_t, \persona_t)$ for a fixed sliding window, where the default window length is 60 seconds and the step size is 5 seconds.
+
+The state target is a vector $\statevec_t = [v_t, a_t, s_t, f_t, d_t, q_t]$ representing valence, arousal, stress, fatigue, attention drop, and suppression. The timing target is $\timing_t \in \{\texttt{immediate}, \texttt{delay}, \texttt{none}\}$. The strategy target is $\strategy_t \in \{\texttt{observe}, \texttt{nudge}, \texttt{care}, \texttt{guard}\}$.
+
+The main prediction function is
+\[
+f_\theta(x_t) \rightarrow (\hat{\statevec}_t, \hat{\timing}_t, \hat{\strategy}_t, \hat{u}_t),
+\]
+where $\hat{u}_t$ is a structured utterance sketch that can be rendered into a short care message. In the first release, the utterance sketch is not a fully free-form chatbot output; it is constrained by template tokens, confirmation questions, and repair phrases.
+
+The formal interfaces are:
+\begin{itemize}[leftmargin=1.3em]
+  \item \texttt{StateVectorV1}: affective state supervision.
+  \item \texttt{TimingDecisionV1}: timing class, score, uncertainty, and reason codes.
+  \item \texttt{StrategyPlanV1}: strategy level, outline steps, and utterance constraints.
+  \item \texttt{CareUtteranceV1}: draft text, confirmation question, and repair text.
+  \item \texttt{FeedbackEventV1}: acceptance, annoyance, response latency, and optional self-report.
+\end{itemize}
+
+The paper treats timing prediction as the primary research problem and strategy generation as a conditional downstream task. This prevents the model from collapsing into a single end-to-end language objective and keeps the evaluation aligned with intervention timing.

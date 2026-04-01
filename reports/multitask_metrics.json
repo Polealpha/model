@@ -1,0 +1,130 @@
+{
+  "model": "multitask_temporal",
+  "metrics": {
+    "train": {
+      "timing_accuracy": 0.8344166666666667,
+      "timing_balanced_accuracy": 0.8737146563502982,
+      "timing_macro_f1": 0.761502670827248,
+      "state_mae": 0.06907660514116287,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9801336146272855,
+          "recall": 0.8527724665391969,
+          "f1": 0.91202813790847,
+          "support": 13075.0
+        },
+        "delay": {
+          "precision": 0.8444367736739156,
+          "recall": 0.7837462622810765,
+          "f1": 0.812960398781501,
+          "support": 9364.0
+        },
+        "immediate": {
+          "precision": 0.3907958301550979,
+          "recall": 0.9846252402306214,
+          "f1": 0.5595194757917729,
+          "support": 1561.0
+        }
+      }
+    },
+    "dev": {
+      "timing_accuracy": 0.8445833333333334,
+      "timing_balanced_accuracy": 0.8817007183786995,
+      "timing_macro_f1": 0.7727227672018095,
+      "state_mae": 0.06958906352519989,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9810344827586207,
+          "recall": 0.8614685844057532,
+          "f1": 0.9173720274083031,
+          "support": 1321.0
+        },
+        "delay": {
+          "precision": 0.8498845265588915,
+          "recall": 0.7965367965367965,
+          "f1": 0.8223463687150838,
+          "support": 924.0
+        },
+        "immediate": {
+          "precision": 0.4090909090909091,
+          "recall": 0.9870967741935484,
+          "f1": 0.5784499054820416,
+          "support": 155.0
+        }
+      }
+    },
+    "test": {
+      "timing_accuracy": 0.8375,
+      "timing_balanced_accuracy": 0.8687912187688501,
+      "timing_macro_f1": 0.7720738718275025,
+      "state_mae": 0.06940801441669464,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9827586206896551,
+          "recall": 0.8564988730277987,
+          "f1": 0.9152950622240065,
+          "support": 1331.0
+        },
+        "delay": {
+          "precision": 0.8249118683901293,
+          "recall": 0.7843575418994413,
+          "f1": 0.8041237113402062,
+          "support": 895.0
+        },
+        "immediate": {
+          "precision": 0.4318766066838046,
+          "recall": 0.9655172413793104,
+          "f1": 0.5968028419182948,
+          "support": 174.0
+        }
+      }
+    },
+    "synthetic_test": {
+      "timing_accuracy": 0.8375,
+      "timing_balanced_accuracy": 0.8687912187688501,
+      "timing_macro_f1": 0.7720738718275025,
+      "state_mae": 0.06940801441669464,
+      "timing_per_class": {
+        "none": {
+          "precision": 0.9827586206896551,
+          "recall": 0.8564988730277987,
+          "f1": 0.9152950622240065,
+          "support": 1331.0
+        },
+        "delay": {
+          "precision": 0.8249118683901293,
+          "recall": 0.7843575418994413,
+          "f1": 0.8041237113402062,
+          "support": 895.0
+        },
+        "immediate": {
+          "precision": 0.4318766066838046,
+          "recall": 0.9655172413793104,
+          "f1": 0.5968028419182948,
+          "support": 174.0
+        }
+      }
+    }
+  },
+  "config": {
+    "architecture": "video_temporal",
+    "batch_size": 512,
+    "sequence_steps": 48,
+    "hidden_dim": 384,
+    "lr": 0.0003,
+    "epochs": 36,
+    "weight_decay": 0.0001,
+    "dropout": 0.1,
+    "num_layers": 6,
+    "num_heads": 8,
+    "state_loss_weight": 0.5,
+    "grad_clip": 1.0,
+    "seed": 42,
+    "device": "cuda",
+    "multi_gpu": true
+  },
+  "train_sources": {
+    "synthetic_train": 24000,
+    "weaklabel_train": 0
+  }
+}

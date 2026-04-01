@@ -1,0 +1,50 @@
+repo_root: .
+data_root: datasets
+synthetic_root: datasets/synthetic
+processed_root: datasets/processed
+reports_root: reports
+artifacts_root: artifacts
+random_seed: 42
+
+synthetic:
+  train_size: 1200
+  dev_size: 240
+  test_size: 240
+  window_sec: 60
+  step_sec: 5
+
+structured_baseline:
+  max_iter: 1000
+  C: 2.0
+  seed: 42
+
+multitask:
+  architecture: video_temporal
+  batch_size: 128
+  sequence_steps: 24
+  hidden_dim: 192
+  lr: 0.0005
+  epochs: 24
+  weight_decay: 0.0001
+  dropout: 0.1
+  num_layers: 3
+  num_heads: 4
+  state_loss_weight: 0.5
+  grad_clip: 1.0
+  seed: 42
+
+joint:
+  architecture: video_temporal
+  batch_size: 128
+  sequence_steps: 24
+  hidden_dim: 192
+  lr: 0.0005
+  epochs: 28
+  weight_decay: 0.0001
+  dropout: 0.1
+  num_layers: 3
+  num_heads: 4
+  strategy_loss_weight: 1.0
+  template_loss_weight: 0.4
+  grad_clip: 1.0
+  seed: 42

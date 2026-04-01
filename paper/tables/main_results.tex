@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Main offline results. Combined columns use the full held-out test split produced by each training setting; because that split contains 2{,}400 synthetic windows but only 62 weaklabel windows, the combined columns are synthetic-dominated. Synthetic columns evaluate only the held-out synthetic split, and the weaklabel column reports timing Macro-F1 on the held-out weaklabel split when available. Strategy scores remain template-like and should be interpreted as constrained planning sanity checks rather than open-ended response quality. All numbers are percentages except state MAE.}
+\label{tab:main-results}
+\small
+\begin{tabular}{llccccccc}
+\toprule
+Model & Train Data & Comb. Bal. Acc. & Comb. Macro-F1 & Synth Bal. Acc. & Synth Macro-F1 & Weaklabel Macro-F1 & Comb. Strategy Macro-F1 & State MAE \\
+\midrule
+Structured & Synthetic & 85.56 & 79.11 & 85.56 & 79.11 & -- & 80.44 & -- \\
+Structured & Synthetic + weaklabel & 83.81 & 77.78 & 84.98 & 78.72 & 27.29 & 78.99 & -- \\
+Multitask temporal & Synthetic & 86.88 & 77.21 & 86.88 & 77.21 & -- & -- & 0.069 \\
+Multitask temporal & Synthetic + weaklabel & 82.24 & 76.15 & 86.66 & 78.17 & 7.62 & -- & 0.083 \\
+Joint temporal & Synthetic + weaklabel & 85.79 & 80.45 & 86.90 & 81.06 & 36.29 & 82.66 & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}

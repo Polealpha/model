@@ -1,0 +1,23 @@
+{
+  "db_path": "E:\\Desktop\\emotion engine\\backend\\auth.db",
+  "bridge_root": "E:\\Desktop\\emotion engine\\logs",
+  "include_bridge": false,
+  "counts": {
+    "train": 286,
+    "dev": 61,
+    "test": 62
+  },
+  "label_distribution": {
+    "timing": {
+      "none": 160,
+      "immediate": 187,
+      "delay": 62
+    },
+    "strategy": {
+      "guard": 94,
+      "observe": 97,
+      "care": 62,
+      "nudge": 156
+    }
+  }
+}
