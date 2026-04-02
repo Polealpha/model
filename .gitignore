@@ -15,6 +15,7 @@ release-*/
 # Data and outputs
 datasets/synthetic/*.jsonl
 datasets/trimodal_emotion/*.npz
+datasets/public_cremad_trimodal/*.npz
 datasets/processed/*
 datasets/splits/*.json
 reports/generated/*
